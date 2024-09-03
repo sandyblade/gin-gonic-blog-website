@@ -1,7 +1,7 @@
 /**
- * This file is part of the Sandy Andryanto Company Profile Website.
+ * This file is part of the Sandy Andryanto Blog Applicatione.
  *
- * @author     Sandy Andryanto <sandy.andryanto404@gmail.com>
+ * @author     Sandy Andryanto <sandy.andryanto.blade@gmail.com>
  * @copyright  2024
  *
  * For the full copyright and license information,
@@ -13,6 +13,7 @@ package main
 
 import (
 	_db "api/backend/src/db"
+	_routes "api/backend/src/routes"
 	"database/sql"
 	"fmt"
 	"log"
@@ -32,8 +33,8 @@ func main() {
 	goseeder.WithSeeder(connectToDbOrDie, func() {})
 	db := _db.SetupDB()
 	db.LogMode(true)
-	// r := routes.SetupRoutes(db)
-	// r.Run("0.0.0.0:" + os.Getenv("APP_PORT"))
+	r := _routes.SetupRoutes(db)
+	r.Run("0.0.0.0:" + os.Getenv("APP_PORT"))
 }
 
 func connectToDbOrDie() *sql.DB {

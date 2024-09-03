@@ -1,3 +1,14 @@
+/**
+ * This file is part of the Sandy Andryanto Blog Applicatione.
+ *
+ * @author     Sandy Andryanto <sandy.andryanto.blade@gmail.com>
+ * @copyright  2024
+ *
+ * For the full copyright and license information,
+ * please view the LICENSE.md file that was distributed
+ * with this source code.
+ */
+
 package db
 
 import (
@@ -26,5 +37,18 @@ func SetupDB() *gorm.DB {
 
 func Config() {
 	db := SetupDB()
+	db.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(models.Activity{})
+	db.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(models.Article{})
+	db.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(models.Comment{})
+	db.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(models.Notification{})
 	db.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(models.User{})
+	db.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(models.Viewer{})
+	db.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(models.Article{}).AddForeignKey("user_id", "users(id)", "RESTRICT", "RESTRICT")
+	db.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(models.Comment{}).AddForeignKey("user_id", "users(id)", "RESTRICT", "RESTRICT")
+	db.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(models.Comment{}).AddForeignKey("article_id", "articles(id)", "RESTRICT", "RESTRICT")
+	db.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(models.Comment{}).AddForeignKey("parent_id", "comments(id)", "RESTRICT", "RESTRICT")
+	db.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(models.Viewer{}).AddForeignKey("user_id", "users(id)", "RESTRICT", "RESTRICT")
+	db.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(models.Viewer{}).AddForeignKey("article_id", "articles(id)", "RESTRICT", "RESTRICT")
+	db.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(models.Notification{}).AddForeignKey("user_id", "users(id)", "RESTRICT", "RESTRICT")
+	db.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(models.Activity{}).AddForeignKey("user_id", "users(id)", "RESTRICT", "RESTRICT")
 }
