@@ -15,37 +15,25 @@ import (
 	controllers "api/backend/src/controllers"
 )
 
-func AuthRoutes() []RouteSource {
+func CommentRoutes() []RouteSource {
 	routes := []RouteSource{
 		{
-			"/api/auth/login",
-			"POST",
-			false,
-			controllers.AuthLogin,
-		},
-		{
-			"/api/auth/register",
-			"POST",
-			false,
-			controllers.AuthRegister,
-		},
-		{
-			"/api/auth/email/forgot",
-			"POST",
-			false,
-			controllers.AuthEmailForgot,
-		},
-		{
-			"/api/auth/email/reset/:token",
-			"POST",
-			false,
-			controllers.AuthEmailReset,
-		},
-		{
-			"/api/auth/confirm/:token",
+			"/api/comment/list/:id",
 			"GET",
 			false,
-			controllers.AuthConfirm,
+			controllers.CommentList,
+		},
+		{
+			"/api/comment/create/:id",
+			"POST",
+			true,
+			controllers.CommentCreate,
+		},
+		{
+			"/api/comment/remove/:id",
+			"DELETE",
+			true,
+			controllers.CommentRemove,
 		},
 	}
 	return routes

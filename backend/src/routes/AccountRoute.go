@@ -15,37 +15,43 @@ import (
 	controllers "api/backend/src/controllers"
 )
 
-func AuthRoutes() []RouteSource {
+func AccountRoutes() []RouteSource {
 	routes := []RouteSource{
 		{
-			"/api/auth/login",
-			"POST",
-			false,
-			controllers.AuthLogin,
-		},
-		{
-			"/api/auth/register",
-			"POST",
-			false,
-			controllers.AuthRegister,
-		},
-		{
-			"/api/auth/email/forgot",
-			"POST",
-			false,
-			controllers.AuthEmailForgot,
-		},
-		{
-			"/api/auth/email/reset/:token",
-			"POST",
-			false,
-			controllers.AuthEmailReset,
-		},
-		{
-			"/api/auth/confirm/:token",
+			"/api/account/detail",
 			"GET",
-			false,
-			controllers.AuthConfirm,
+			true,
+			controllers.AccountDetail,
+		},
+		{
+			"/api/account/update",
+			"POST",
+			true,
+			controllers.AccountUpdate,
+		},
+		{
+			"/api/account/password",
+			"POST",
+			true,
+			controllers.AccountPassword,
+		},
+		{
+			"/api/account/upload",
+			"POST",
+			true,
+			controllers.AccountUpload,
+		},
+		{
+			"/api/account/token",
+			"POST",
+			true,
+			controllers.AccountRefresh,
+		},
+		{
+			"/api/account/activity",
+			"GET",
+			true,
+			controllers.AccountActivity,
 		},
 	}
 	return routes

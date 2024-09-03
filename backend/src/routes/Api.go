@@ -47,6 +47,10 @@ func SetupRoutes(db *gorm.DB) *gin.Engine {
 
 	var AppRoutes = []RouteSource{}
 	AppRoutes = append(AppRoutes, AuthRoutes()...)
+	AppRoutes = append(AppRoutes, AccountRoutes()...)
+	AppRoutes = append(AppRoutes, NotificationRoutes()...)
+	AppRoutes = append(AppRoutes, ArticleRoutes()...)
+	AppRoutes = append(AppRoutes, CommentRoutes()...)
 
 	for _, element := range AppRoutes {
 		if element.Method == "POST" {

@@ -27,7 +27,7 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
-func Login(c *gin.Context) {
+func AuthLogin(c *gin.Context) {
 
 	db := c.MustGet("db").(*gorm.DB)
 
@@ -76,7 +76,7 @@ func Login(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"token": services.JWTAuthService().GenerateToken(int(user.Id), user.Email, true)})
 }
 
-func Register(c *gin.Context) {
+func AuthRegister(c *gin.Context) {
 
 	db := c.MustGet("db").(*gorm.DB)
 
@@ -146,7 +146,7 @@ func Register(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "Your account has been created. Please check your email for the confirmation message we just sent you."})
 }
 
-func Confirm(c *gin.Context) {
+func AuthConfirm(c *gin.Context) {
 
 	var user models.User
 
@@ -168,7 +168,7 @@ func Confirm(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "Your registration is complete. Now you can login."})
 }
 
-func EmailForgot(c *gin.Context) {
+func AuthEmailForgot(c *gin.Context) {
 
 	db := c.MustGet("db").(*gorm.DB)
 
@@ -206,7 +206,7 @@ func EmailForgot(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "We have e-mailed your password reset link!", "token": token})
 }
 
-func EmailReset(c *gin.Context) {
+func AuthEmailReset(c *gin.Context) {
 
 	db := c.MustGet("db").(*gorm.DB)
 
