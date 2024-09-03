@@ -32,7 +32,7 @@ func ArticleRoutes() []RouteSource {
 		{
 			"/api/article/read/:slug",
 			"GET",
-			false,
+			true,
 			controllers.ArticleRead,
 		},
 		{
@@ -44,7 +44,7 @@ func ArticleRoutes() []RouteSource {
 		{
 			"/api/article/remove/:id",
 			"DELETE",
-			false,
+			true,
 			controllers.ArticleRemove,
 		},
 		{
@@ -56,11 +56,11 @@ func ArticleRoutes() []RouteSource {
 		{
 			"/api/article/words",
 			"GET",
-			false,
+			true,
 			controllers.ArticleWords,
 		},
 		{
-			"/api/article/upload",
+			"/api/article/upload/:id",
 			"POST",
 			true,
 			controllers.ArticleUpload,

@@ -12,17 +12,18 @@
 package models
 
 import (
+	"database/sql"
 	"time"
 )
 
 type Comment struct {
-	Id        uint64    `json:"id" gorm:"primary_key"`
-	ParentId  uint64    `json:"parent_id" gorm:"index;default:null;"`
-	ArticleId uint64    `json:"article_id" gorm:"index;not null"`
-	UserId    uint64    `json:"user_id" gorm:"index;not null"`
-	Comment   string    `json:"comment"  gorm:"type:text;not null"`
-	CreatedAt time.Time `gorm:"index;default:CURRENT_TIMESTAMP" json:"created_at"`
-	UpdatedAt time.Time `gorm:"index;default:CURRENT_TIMESTAMP" json:"updated_at"`
+	Id        uint64        `json:"id" gorm:"primary_key"`
+	ParentId  sql.NullInt64 `json:"parent_id" gorm:"index;default:null;"`
+	ArticleId uint64        `json:"article_id" gorm:"index;not null"`
+	UserId    uint64        `json:"user_id" gorm:"index;not null"`
+	Comment   string        `json:"comment"  gorm:"type:text;not null"`
+	CreatedAt time.Time     `gorm:"index;default:CURRENT_TIMESTAMP" json:"created_at"`
+	UpdatedAt time.Time     `gorm:"index;default:CURRENT_TIMESTAMP" json:"updated_at"`
 }
 
 func (Comment) TableName() string {
