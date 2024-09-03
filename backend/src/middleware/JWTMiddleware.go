@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	service "backend/services"
+	service "api/backend/src/services"
 	"fmt"
 	"net/http"
 	"strings"
@@ -12,7 +12,7 @@ import (
 
 func AuthorizeJWT() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		const _BEARER_SCHEMA = "Bearer "
+		const BEARER_SCHEMA = "Bearer "
 		authHeader := c.GetHeader("Authorization")
 		if len(strings.TrimSpace(authHeader)) == 0 {
 			c.AbortWithStatus(http.StatusUnauthorized)

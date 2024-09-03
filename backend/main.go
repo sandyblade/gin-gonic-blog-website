@@ -12,12 +12,15 @@
 package main
 
 import (
+	_db "api/backend/src/db"
+	"database/sql"
 	"fmt"
-	"github.com/joho/godotenv"
-	"github.com/kristijorgji/goseeder"
 	"log"
 	"net/url"
 	"os"
+
+	"github.com/joho/godotenv"
+	"github.com/kristijorgji/goseeder"
 )
 
 func main() {
@@ -25,12 +28,12 @@ func main() {
 	if err != nil {
 		log.Panic("Error loading .env file")
 	}
-	utilities.Config()
+	_db.Config()
 	goseeder.WithSeeder(connectToDbOrDie, func() {})
-	db := utilities.SetupDB()
+	db := _db.SetupDB()
 	db.LogMode(true)
-	r := routes.SetupRoutes(db)
-	r.Run("0.0.0.0:" + os.Getenv("APP_PORT"))
+	// r := routes.SetupRoutes(db)
+	// r.Run("0.0.0.0:" + os.Getenv("APP_PORT"))
 }
 
 func connectToDbOrDie() *sql.DB {
